@@ -1,0 +1,11 @@
+home-assistant.log*
+home-assistant_v2.db*
+zigbee.db*
+.storage/
+*.yaml~
+*.pem
+*.key
+*.cert
+__pycache__/
+.cloud
+.google.token
