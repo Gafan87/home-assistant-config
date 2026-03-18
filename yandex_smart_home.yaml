@@ -1,38 +1,22 @@
 # yandex_smart_home.yaml
-# Настройки интеграции Yandex Smart Home
+# Расширенная конфигурация
 
-# Основная конфигурация
-settings:
-  cloud_mode: true  # Работа через облако
-  # Если хотите отладочные логи:
-  # debug: true
-
-# Индивидуальные настройки устройств
 entity_config:
-  # WAN статус (интернет соединение)
+  # WAN статус как датчик
   binary_sensor.archer_a5_wan_status:
     name: "Домашний интернет"
-    type: devices.types.sensor.internet
-    properties:
-      - type: event
-        instance: connection_state
-        value_template: "{{ 'connected' if value == 'on' else 'disconnected' }}"
-
-  # Дверной датчик (пример правильной настройки)
-  binary_sensor.door_sensor:  # Замените на ID вашего датчика
+    type: sensor
+    device_class: connectivity  # Оставляем оригинальный класс
+    
+  # Дверной датчик
+  binary_sensor.door_sensor:
     name: "Входная дверь"
-    type: devices.types.sensor.door
-    properties:
-      - type: event
-        instance: open
-        value_template: "{{ 'opened' if value == 'on' else 'closed' }}"
-
-  # Пример для датчика температуры (если есть)
-  sensor.temperature_sensor:  # Замените на ID вашего датчика
+    type: sensor
+    device_class: door  # Яндекс поймет как открытие двери
+    
+  # Температура
+  sensor.temperature_sensor:
     name: "Температура в спальне"
-    type: devices.types.sensor.temperature
-    properties:
-      - type: float
-        instance: temperature
-        unit: "celsius"
-        value_template: "{{ value | float }}"
+    type: sensor
+    device_class: temperature
+    unit_of_measurement: "°C"
