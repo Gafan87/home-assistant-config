@@ -1,8 +1,11 @@
-# yandex_smart_home.yaml
-entity_config:
-  binary_sensor.archer_a5_wan_status:
-    name: "Домашний интернет"
-    type: sensor
-    properties:
-      - type: event.open
-        value_template: "{{ 'opened' if states('binary_sensor.archer_a5_wan_status') == 'on' else 'closed' }}"
+alias: "Статус интернета"
+trigger:
+  - platform: conversation
+    command: ["интернет работает", "статус интернета"]
+action:
+  - service: media_player.play_media
+    target:
+      entity_id: media_player.yandex_station
+    data:
+      media_content_id: "{{ 'Интернет работает' if states('sensor.archer_a5_wan_status') == 'connected' else 'Интернет не работает' }}"
+      media_content_type: "text"
