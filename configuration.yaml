@@ -19,3 +19,6 @@ automation: !include_dir_merge_list automations/
 
 script: !include scripts.yaml
 scene: !include scenes.yaml
+
+# Yandex Smart Home integration
+yandex_smart_home: !include yandex_smart_home.yaml
