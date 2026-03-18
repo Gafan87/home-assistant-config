@@ -10,15 +10,9 @@ http:
 frontend:
   themes: !include_dir_merge_named themes
 
-# Разрешаем выполнять shell-команды
-shell_command:
-  pull_and_restart: 'bash /config/update-ha.sh && ha core restart'
+# Подключаем настройки Yandex Smart Home из отдельного файла
+yandex_smart_home: !include yandex_smart_home.yaml
 
-# Подключаем автоматизации из папки
-automation: !include_dir_merge_list automations/
-
+automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
-
-# Yandex Smart Home integration
-yandex_smart_home: !include yandex_smart_home.yaml
