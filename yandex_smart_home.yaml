@@ -1,12 +1,10 @@
 # yandex_smart_home.yaml
-# Основано на документации v1.1.x
-
 entity_config:
   binary_sensor.archer_a5_wan_status:
     name: "Домашний интернет"
     type: sensor
     properties:
-      - type: event
+      - type: event.open  # Из списка поддерживаемых типов
         entity: binary_sensor.archer_a5_wan_status
         attribute: state
-        value_template: "{{ 'connected' if value == 'on' else 'disconnected' }}"
+        value_template: "{{ 'opened' if value == 'on' else 'closed' }}"
