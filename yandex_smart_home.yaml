@@ -4,7 +4,5 @@ entity_config:
     name: "Домашний интернет"
     type: sensor
     properties:
-      - type: event.open  # Из списка поддерживаемых типов
-        entity: binary_sensor.archer_a5_wan_status
-        attribute: state
-        value_template: "{{ 'opened' if value == 'on' else 'closed' }}"
+      - type: event.open
+        value_template: "{{ 'opened' if states('binary_sensor.archer_a5_wan_status') == 'on' else 'closed' }}"
