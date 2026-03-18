@@ -10,6 +10,9 @@ http:
 frontend:
   themes: !include_dir_merge_named themes
 
+# Подключаем настройки Yandex Smart Home из отдельного файла
+yandex_smart_home: !include yandex_smart_home.yaml
+
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
