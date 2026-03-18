@@ -1,13 +1,12 @@
 # yandex_smart_home.yaml
-# Только WAN датчик
+# Основано на документации v1.1.x
 
 entity_config:
-  # WAN статус интернета
   binary_sensor.archer_a5_wan_status:
     name: "Домашний интернет"
-    type: devices.types.sensor.event
+    type: sensor
     properties:
-      - type: devices.properties.event
+      - type: event
         entity: binary_sensor.archer_a5_wan_status
         attribute: state
         value_template: "{{ 'connected' if value == 'on' else 'disconnected' }}"
