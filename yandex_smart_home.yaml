@@ -1,12 +1,24 @@
-entity_config:
-  sensor.archer_a5_wan_status:
-    name: "Домашний интернет"
-    type: sensor
-    properties:
-      - type: event.open
-        value_template: >
-          {% if states('sensor.archer_a5_wan_status') in ['connected', 'online', 'up', 'on'] %}
-            opened
-          {% else %}
-            closed
-          {% endif %}
+alias: "Статус интернета (только спрошенная колонка)"
+description: "Отвечает через ту колонку, которую спросили"
+trigger:
+  - platform: conversation
+    command:
+      - интернет работает
+      - статус интернета
+      - есть интернет
+condition: []
+action:
+  - service: media_player.play_media
+    target:
+      entity_id: "{{ trigger.platform.entity_id if trigger.platform == 'conversation' else 'label.yandex_station' }}"
+    data:
+      media_content_id: >-
+        {% if states('sensor.archer_a5_wan_status') == 'connected' %}
+          Интернет работает нормально
+        {% elif states('sensor.archer_a5_wan_status') == 'disconnected' %}
+          Интернет не работает
+        {% else %}
+          Статус интернета неизвестен
+        {% endif %}
+      media_content_type: "text"
+mode: single
