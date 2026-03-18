@@ -1,0 +1,11 @@
+- id: "git_sync_from_github"
+  alias: "Git Sync: Обновление конфига из GitHub"
+  trigger:
+    - platform: webhook
+      webhook_id: "git_update"
+  action:
+    - service: persistent_notification.create
+      data:
+        title: "Git Sync"
+        message: "Получен сигнал Github. Начинаю обновление конфигурации..."
+    - service: shell_command.pull_and_restart
