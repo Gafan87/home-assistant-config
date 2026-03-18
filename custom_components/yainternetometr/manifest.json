@@ -1,0 +1,15 @@
+{
+  "domain": "yainternetometr",
+  "name": "Яндекс Интернетометр",
+  "codeowners": [
+    "@minitwiks"
+  ],
+  "config_flow": true,
+  "documentation": "https://github.com/ErilovNikita/ha-yainternetometr#readme",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/ErilovNikita/ha-yainternetometr/issues",
+  "requirements": [
+    "yaspeedtest==0.1.7"
+  ],
+  "version": "v1.1.1"
+}
