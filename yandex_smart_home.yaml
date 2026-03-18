@@ -1,22 +1,13 @@
 # yandex_smart_home.yaml
-# Расширенная конфигурация
+# Только WAN датчик
 
 entity_config:
-  # WAN статус как датчик
+  # WAN статус интернета
   binary_sensor.archer_a5_wan_status:
     name: "Домашний интернет"
-    type: sensor
-    device_class: connectivity  # Оставляем оригинальный класс
-    
-  # Дверной датчик
-  binary_sensor.door_sensor:
-    name: "Входная дверь"
-    type: sensor
-    device_class: door  # Яндекс поймет как открытие двери
-    
-  # Температура
-  sensor.temperature_sensor:
-    name: "Температура в спальне"
-    type: sensor
-    device_class: temperature
-    unit_of_measurement: "°C"
+    type: devices.types.sensor.event
+    properties:
+      - type: devices.properties.event
+        entity: binary_sensor.archer_a5_wan_status
+        attribute: state
+        value_template: "{{ 'connected' if value == 'on' else 'disconnected' }}"
